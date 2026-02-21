@@ -1,11 +1,11 @@
-from supabase import create_client, Client
+from supabase import create_client
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize Supabase client
-supabase: Client = create_client(
+# Initialize Supabase client (compatible with v2.9.0+)
+supabase = create_client(
     os.getenv('SUPABASE_URL'),
     os.getenv('SUPABASE_KEY')
 )
