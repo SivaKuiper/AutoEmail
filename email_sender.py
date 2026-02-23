@@ -28,7 +28,7 @@ def send_email(to_emails, subject, body_html):
     
     try:
         # Connect to Gmail SMTP
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 587) as server:
             server.login(gmail_email, gmail_password)
             server.send_message(msg)
         
