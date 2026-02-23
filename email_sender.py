@@ -1,40 +1,42 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
+import resend
 
 load_dotenv()
 
 def send_email(to_emails, subject, body_html):
-    """Send email via Gmail SMTP"""
+    """Send email via Resend API"""
     
-    gmail_email = os.getenv('GMAIL_EMAIL')
-    gmail_password = os.getenv('GMAIL_APP_PASSWORD')
+    resend_api_key = os.getenv('RESEND_API_KEY')
     
-    if not gmail_email or not gmail_password:
-        print("❌ Gmail credentials not configured in .env file")
+    if not resend_api_key:
+        print("❌ Resend API key not configured")
         return False
     
-    # Create message
-    msg = MIMEMultipart('alternative')
-    msg['From'] = f"KEIPL Granite <{gmail_email}>"
-    msg['To'] = ', '.join(to_emails) if isinstance(to_emails, list) else to_emails
-    msg['Subject'] = subject
-    
-    # Attach HTML body
-    html_part = MIMEText(body_html, 'html')
-    msg.attach(html_part)
+    # Set API key
+    resend.api_key = resend_api_key
     
     try:
-        # Connect to Gmail SMTP - PORT 587 WITH TLS
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
-            server.starttls()  # Enable TLS encryption
-            server.login(gmail_email, gmail_password)
-            server.send_message(msg)
+        # Prepare recipients
+        if isinstance(to_emails, list):
+            recipients = to_emails
+        else:
+            recipients = [to_emails]
+        
+        # Send email using Resend's domain
+        params = {
+            "from": "KEIPL Granite <onboarding@resend.dev>",
+            "to": recipients,
+            "subject": subject,
+            "html": body_html,
+        }
+        
+        response = resend.Emails.send(params)
         
         print(f"✅ Email sent: {subject}")
+        print(f"   Email ID: {response['id']}")
         return True
+        
     except Exception as e:
         print(f"❌ Failed to send email: {e}")
         return False
@@ -43,15 +45,24 @@ def send_email(to_emails, subject, body_html):
 if __name__ == "__main__":
     test_html = """
     <html>
-    <body>
-        <h1>Test Email from KEIPL</h1>
-        <p>If you receive this, email automation is working! ✅</p>
+    <body style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
+        <div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px;">
+            <h1 style="color: #00e676; margin: 0;">✅ Test Email from KEIPL</h1>
+            <p style="font-size: 16px; color: #333; margin-top: 20px;">
+                If you receive this, Resend email automation is working perfectly!
+            </p>
+            <p style="font-size: 14px; color: #666; margin-top: 20px;">
+                — KEIPL Granite Inventory System
+            </p>
+        </div>
     </body>
     </html>
     """
     
     admin_email = os.getenv('ADMIN_EMAIL')
     if admin_email:
-        send_email([admin_email], "KEIPL Test Email", test_html)
+        print(f"Sending test email to {admin_email}...")
+        send_email([admin_email], "KEIPL Test Email via Resend", test_html)
+        print("✅ Check your inbox!")
     else:
         print("❌ ADMIN_EMAIL not set in .env file")
