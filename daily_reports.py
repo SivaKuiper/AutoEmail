@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def send_daily_report():
-    """Send daily inventory report at 8.15 PM IST"""
+    """Send daily inventory report at 9 PM IST"""
     print(f"🔄 Generating daily report at {datetime.now()}")
     
     try:
@@ -47,7 +47,7 @@ def send_daily_report():
         traceback.print_exc()
 
 def send_weekly_summary():
-    """Send weekly summary on Monday 9 AM IST"""
+    """Send weekly summary on Monday 8 AM IST"""
     print(f"🔄 Generating weekly summary at {datetime.now()}")
     
     try:
@@ -85,13 +85,13 @@ if __name__ == "__main__":
     print(f"Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print()
     
-    # Schedule jobs
-    schedule.every().day.at("08:00").do(send_daily_report)  # 8.15 PM daily
-    schedule.every().monday.at("09:00").do(send_weekly_summary)  # Monday 9 AM
+    # Schedule jobs - NEW TIMES
+    schedule.every().day.at("21:00").do(send_daily_report)  # 9 PM IST daily
+    schedule.every().monday.at("08:00").do(send_weekly_summary)  # Monday 8 AM IST
     
     print("✅ Scheduled:")
-    print("   • Daily report: Every day at 8:15 PM IST")
-    print("   • Weekly summary: Every Monday at 9:00 AM IST")
+    print("   • Daily report: Every day at 9:00 PM IST")
+    print("   • Weekly summary: Every Monday at 8:00 AM IST")
     print()
     print("📧 Email automation is running...")
     print("   Press Ctrl+C to stop")
