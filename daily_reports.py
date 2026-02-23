@@ -90,7 +90,7 @@ if __name__ == "__main__":
     schedule.every().monday.at("09:00").do(send_weekly_summary)  # Monday 9 AM
     
     print("✅ Scheduled:")
-    print("   • Daily report: Every day at 8:15 AM IST")
+    print("   • Daily report: Every day at 8:15 PM IST")
     print("   • Weekly summary: Every Monday at 9:00 AM IST")
     print()
     print("📧 Email automation is running...")
