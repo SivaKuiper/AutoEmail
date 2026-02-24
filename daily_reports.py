@@ -112,12 +112,11 @@ if __name__ == "__main__":
     print("   Press Ctrl+C to stop")
     print("=" * 50)
     print()
-    
-    # Test on startup
-print("\n🧪 Sending test email on startup...")
-send_daily_report()
-    
+        
     # Run continuously
+    # Test on startup
+    print("\n🧪 Sending test email on startup...")
+    send_daily_report()
     while True:
         schedule.run_pending()
         time.sleep(60)
