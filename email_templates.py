@@ -37,7 +37,7 @@ def daily_report_html(inventory_data, sales_data):
     <body>
         <div class="container">
             <div class="header">
-                <h1>📊 KEIPL Daily Inventory Report</h1>
+                <h1>📊 FACTORY Daily Inventory Report</h1>
                 <p>{datetime.now().strftime('%A, %B %d, %Y')}</p>
             </div>
             
@@ -82,7 +82,7 @@ def daily_report_html(inventory_data, sales_data):
             </div>
             
             <div class="footer">
-                <p>This is an automated report from KEIPL Granite Inventory System</p>
+                <p>This is an automated report from Kriya Granite Inventory System</p>
                 <p><a href="https://your-app.netlify.app">View Live Inventory →</a></p>
             </div>
         </div>
