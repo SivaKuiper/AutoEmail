@@ -99,6 +99,7 @@ if __name__ == "__main__":
     print()
     
     # Run continuously
+    
      while True:
         schedule.run_pending()
         time.sleep(60)  # Check every minute
