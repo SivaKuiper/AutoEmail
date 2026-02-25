@@ -102,7 +102,7 @@ if __name__ == "__main__":
     while True:
         schedule.run_pending()
         time.sleep(60)  # Check every minute
- if __name__ == "daily_reports":
+    if __name__ == "__main__":
     print("🚀 Starting KEIPL Service...")
     
     # --- TEMPORARY TEST LINE ---
