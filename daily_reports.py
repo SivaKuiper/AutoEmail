@@ -60,7 +60,7 @@ def send_weekly_summary():
         
         # Generate email
         subject = f"FACTORY Weekly Summary - Week of {datetime.now().strftime('%d %b %Y')}"
-        body = daily_report_html(inventory, sales)
+        body = daily_report_html(inventory, sales)  # Can use separate weekly template
         
         # Get admin email
         admin_email = os.getenv('ADMIN_EMAIL')
@@ -78,21 +78,16 @@ def send_weekly_summary():
         import traceback
         traceback.print_exc()
 
-# --- MAIN EXECUTION BLOCK ---
-# All lines below must have ZERO spaces at the very beginning
 if __name__ == "__main__":
     print("=" * 50)
     print("🚀 KEIPL Email Automation Service")
     print("=" * 50)
     print(f"Started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print()
     
-    # TRIGGER TEST IMMEDIATELY ON STARTUP
-    print("🧪 Running immediate test send...")
-    send_daily_report()
-    
-    # Schedule future jobs
-    schedule.every().day.at("21:00").do(send_daily_report)
-    schedule.every().monday.at("08:00").do(send_weekly_summary)
+    # Schedule jobs - NEW TIMES
+    schedule.every().day.at("21:00").do(send_daily_report)  # 9 PM IST daily
+    schedule.every().monday.at("08:00").do(send_weekly_summary)  # Monday 8 AM IST
     
     print("✅ Scheduled:")
     print("   • Daily report: Every day at 9:00 PM IST")
@@ -101,7 +96,9 @@ if __name__ == "__main__":
     print("📧 Email automation is running...")
     print("   Press Ctrl+C to stop")
     print("=" * 50)
+    print()
     
+    # Run continuously
     while True:
         schedule.run_pending()
-        time.sleep(60)
+        time.sleep(60)  # Check every minute
