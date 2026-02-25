@@ -77,8 +77,9 @@ def send_weekly_summary():
         print(f"❌ Error generating weekly summary: {e}")
         import traceback
         traceback.print_exc()
-
-if __name__ == "__main__":
+        
+    def send_daily_report():
+    if __name__ == "__main__":
     print("🚀 Manual Test Triggered")
     send_daily_report()
     print("=" * 50)
