@@ -1,45 +1,33 @@
 import smtplib
 import os
+import ssl  # New import for security
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def send_email(to_emails, subject, html_content):
-    """Sends email using Gmail SMTP instead of Resend"""
+    """Sends email using Gmail SMTP via SSL (Port 465)"""
     smtp_server = "smtp.gmail.com"
-    smtp_port = 587
+    smtp_port = 465  # Switched from 587
     
-    # These must match the names you set in Railway Variables
     sender_email = os.getenv('EMAIL_USER')
     password = os.getenv('EMAIL_PASS')
 
-    # Basic check to ensure credentials exist
-    if not sender_email or not password:
-        print("❌ Error: EMAIL_USER or EMAIL_PASS environment variables are missing.")
-        return False
+    # Create a secure SSL context
+    context = ssl.create_default_context()
 
     try:
-        # 1. Create the container (MIME message)
         msg = MIMEMultipart()
         msg['From'] = f"KEIPL Reports <{sender_email}>"
-        msg['To'] = ", ".join(to_emails)
+        msg['To'] = ", ".join(to_emails) 
         msg['Subject'] = subject
-
-        # 2. Attach the HTML content
         msg.attach(MIMEText(html_content, 'html'))
 
-        # 3. Connect to Gmail's Server
-        server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()  # Upgrade the connection to secure TLS
-        
-        # 4. Login and Send
-        server.login(sender_email, password)
-        server.sendmail(sender_email, to_emails, msg.as_string())
-        server.quit()
+        # Connect using SMTP_SSL for Port 465
+        with smtplib.SMTP_SSL(smtp_server, smtp_port, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, to_emails, msg.as_string())
         
         return True
     except Exception as e:
-        print(f"❌ Failed to send email via Gmail: {e}")
+        print(f"❌ Gmail Send Error: {e}")
         return False
