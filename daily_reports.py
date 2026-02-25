@@ -102,7 +102,10 @@ if __name__ == "__main__":
     while True:
         schedule.run_pending()
         time.sleep(60)  # Check every minute
-        # --- TEMPORARY TEST LINE ---
+ if __name__ == "daily_reports":
+    print("🚀 Starting KEIPL Service...")
+    
+    # --- TEMPORARY TEST LINE ---
     # This runs the report immediately when the script starts
     send_daily_report() 
     # ---------------------------
