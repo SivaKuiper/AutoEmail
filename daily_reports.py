@@ -79,6 +79,8 @@ def send_weekly_summary():
         traceback.print_exc()
 
 if __name__ == "__main__":
+    print("🚀 Manual Test Triggered")
+    send_daily_report()
     print("=" * 50)
     print("🚀 KEIPL Email Automation Service")
     print("=" * 50)
