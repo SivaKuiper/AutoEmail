@@ -102,3 +102,13 @@ if __name__ == "__main__":
     while True:
         schedule.run_pending()
         time.sleep(60)  # Check every minute
+        # --- TEMPORARY TEST LINE ---
+    # This runs the report immediately when the script starts
+    send_daily_report() 
+    # ---------------------------
+
+    schedule.every().day.at("21:00").do(send_daily_report)
+    
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
