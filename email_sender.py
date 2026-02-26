@@ -45,25 +45,3 @@ def send_email(to_emails, subject, body_html):
         print(f"❌ Failed to send email: {e}")
         return False
 ```
-
-**Then in Railway Variables:**
-```
-PARTNER_EMAILS = kriyastones@gmail.com,siva@kuiperexports.com,partner2@email.com
-```
-
-**Result:**
-- ✅ You receive in inbox (TO)
-- ✅ Partners receive as BCC (invisible to each other)
-- ✅ Works immediately, no DNS needed!
-
-**Downside:** 
-- Partners see it's addressed to you, not them
-- Slightly less professional
-
----
-
-### **OPTION 3: Keep Current Setup** 💌 **SIMPLEST**
-
-**Keep only your email:**
-```
-PARTNER_EMAILS = kriyastones@gmail.com
