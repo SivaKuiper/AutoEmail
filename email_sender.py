@@ -19,7 +19,7 @@ def send_email(to_emails, subject, body_html):
     try:
         # TEMPORARY: Only send to verified email until domain is verified
         # This avoids the Resend testing restriction
-        verified_email = "siva.dubai@gmail.com"
+        verified_email = "kriyastones@gmail.com"
         
         # Send email only to verified email (ignore other recipients for now)
         params = {
@@ -65,5 +65,5 @@ if __name__ == "__main__":
     """
     
     print("Testing email to verified address...")
-    send_email(["siva.dubai@gmail.com"], "Kriya Granite - Test Email", test_html)
-    print("✅ Check siva.dubai@gmail.com inbox!")
+    send_email(["kriyastones@gmail.com"], "Kriya Granite - Test Email", test_html)
+    print("✅ Check kriyastones@gmail.com inbox!")
