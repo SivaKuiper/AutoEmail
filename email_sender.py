@@ -23,8 +23,8 @@ def send_email(to_emails, subject, body_html):
         else:
             all_partners = [to_emails]
         
-        # Your verified email (must be kriyastones@gmail.com for now)
-        verified_email = "kriyastones@gmail.com"
+        # Your verified email (must match Resend verified email)
+        verified_email = "siva.dubai@gmail.com"
         
         # Separate verified email and BCC partners
         if verified_email in all_partners:
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     """
     
     # Test with multiple emails
-    test_emails = ["kriyastones@gmail.com", "siva@kuiperexportsandimportsprivatelimited.com"]
+    test_emails = ["kriyastones@gmail.com", "siva@kuiperexports.com"]
     print(f"Testing email to: {', '.join(test_emails)}...")
     send_email(test_emails, "Kriya Granite - Test Email with BCC", test_html)
     print("✅ Check all inboxes!")
