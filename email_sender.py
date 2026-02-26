@@ -64,6 +64,3 @@ if __name__ == "__main__":
     </html>
     """
     
-    print("Testing email to verified address...")
-    send_email(["kriyastones@gmail.com"], "Kriya Granite - Test Email", test_html)
-    print("✅ Check kriyastones@gmail.com inbox!")
